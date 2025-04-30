@@ -39,8 +39,9 @@ print(f"\n✅ Vectorstores loaded and merged in {end_load_time - start_load_time
 # ──────────────────────────────────────────────────────────────────────────────
 # Load Mistral 7B model using llama.cpp
 llm = LlamaCpp(
+    # model_path="models/phi-4-q4.gguf",
     model_path="models/mistral-7b-instruct-v0.1.Q4_K_M.gguf",
-    n_ctx=8048,
+    n_ctx=5012,
     temperature=0.7,
     top_p=0.95,
     n_threads=12,
@@ -51,7 +52,7 @@ llm = LlamaCpp(
 # ──────────────────────────────────────────────────────────────────────────────
 # Prompt template for document + question
 template = """[INST]
-You are a helpful assistant. Use the following context to answer the question.
+You are a helpful assistant. Use the following context to answer the question elaborately with bullet points.
 If the answer is not in the context, just say "I don't know".
 
 Context:
@@ -88,7 +89,7 @@ while True:
 
     # Step 2: Get similarity scores separately
     start = time.time()
-    docs_with_scores = merged_db.similarity_search_with_score(query, k=3)
+    docs_with_scores = merged_db.similarity_search_with_score(query, k=2)
     end = time.time()
     # Step 3: Filter documents based on score
     filtered_docs = []

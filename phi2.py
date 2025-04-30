@@ -12,12 +12,13 @@ else:
 
 # Load the Phi-2 model with llama.cpp
 llm = LlamaCpp(
-    model_path="models/phi-2.Q8_0.gguf",
+    # model_path="models/phi-2.Q8_0.gguf",
+    model_path="models/mistral-7b-instruct-v0.1.Q4_K_M.gguf",
     n_ctx=2048,
     temperature=0.7,
     top_p=0.95,
     n_gpu_layers=20,
-    verbose=False,
+    verbose=True,
 )
 
 # Print out the available properties of the LlamaCpp instance
